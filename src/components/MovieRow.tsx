@@ -30,37 +30,40 @@ export const MovieRow = ({ title, fetchData, type = 'movie' }: MovieRowProps) =>
   }, [fetchData]);
 
   return (
-    <div className="mb-16 group/row">
+    <div className="mb-8 md:mb-16 group/row w-full">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6 px-4">
-        <div className="flex-1">
-          <h2 className="text-3xl font-display font-400 text-foreground tracking-tight">
+      <div className="flex items-center justify-between gap-2 md:gap-3 mb-4 md:mb-6 px-3 md:px-4">
+        <div className="flex-1 min-w-0">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-display font-400 text-foreground tracking-tight truncate md:truncate-none">
             {title}
           </h2>
         </div>
-        <button className="opacity-0 group-hover/row:opacity-100 transition-opacity duration-500 p-2 hover:bg-muted/50 rounded-full">
-          <ChevronRight className="h-5 w-5 text-accent" />
+        <button 
+          className="opacity-0 group-hover/row:opacity-100 transition-opacity duration-500 p-1.5 md:p-2 hover:bg-muted/50 rounded-full flex-shrink-0 active:scale-95" 
+          aria-label="View more"
+        >
+          <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-accent" />
         </button>
       </div>
 
       {/* Loading State */}
       {isLoading ? (
-        <div className="px-4 flex gap-4 pb-4">
+        <div className="px-3 md:px-4 flex gap-2 md:gap-4 pb-4 overflow-x-auto">
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className="w-[200px] h-[300px] rounded-3xl bg-muted/30 animate-pulse flex-shrink-0"
+              className="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[200px] h-[180px] sm:h-[210px] md:h-[240px] lg:h-[300px] rounded-lg md:rounded-xl bg-muted/30 animate-pulse flex-shrink-0"
             />
           ))}
         </div>
       ) : (
         /* Scroll Area */
         <ScrollArea className="w-full">
-          <div className="flex gap-4 px-4 pb-4">
+          <div className="flex gap-2 md:gap-4 px-3 md:px-4 pb-4">
             {movies.map((movie, index) => (
               <div
                 key={movie.id}
-                className="w-[200px] flex-shrink-0 animate-fade-in"
+                className="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[200px] h-[180px] sm:h-[210px] md:h-[240px] lg:h-[300px] flex-shrink-0 animate-fade-in"
                 style={{
                   animationDelay: `${index * 50}ms`,
                 }}
@@ -69,7 +72,7 @@ export const MovieRow = ({ title, fetchData, type = 'movie' }: MovieRowProps) =>
               </div>
             ))}
           </div>
-          <ScrollBar orientation="horizontal" className="h-2" />
+          <ScrollBar orientation="horizontal" className="h-1.5 md:h-2" />
         </ScrollArea>
       )}
     </div>
